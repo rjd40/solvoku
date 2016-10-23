@@ -3,18 +3,19 @@ var Picker = {
     Picker.destroy();
 
     var picker = $("<div/>", { class: "picker" });
-    var size = $(".ui-content tr").first().width() / 3;
+
+    var size = $(".ui-content tr").first().width() * 1.5 / 9;
     var x = cell.data().x;
     var y = cell.data().y;
-    var t = cell.offset().top - (0.5 * size) + (1/6 * size) + 1;
-    var l = cell.offset().left - (0.5 * size) + (1/6 * size) + 1;
+    var t = cell.offset().top - 50 - (size/6);
+    var l = cell.offset().left - 50 - (size/6);
 
-    if (x == 0) { l += size / 3; }
-    if (y == 0) { t += size / 3; }
-    if (x == 8) { l -= size / 3; }
-    if (y == 8) { t -= size / 3; }
+    if (x == 0) { l += size/10; }
+    if (y == 0) { t += size/10; }
+    if (x == 8) { l -= size/10; }
+    if (y == 8) { t -= size/10; }
 
-    for (var i = 1; i <= 9; ++i) {
+    /*for (var i = 1; i <= 9; ++i) {
       var b = $("<button/>", {
         class: "pick",
         text: i,
@@ -39,20 +40,21 @@ var Picker = {
         b.addClass("selected");
       };
     }
-
+    */
     picker.css({
       "top": t,
       "left": l,
-      "height": size - 6,
-      "width": size - 6
+      "height": size,
+      "width": size
     });
 
-    cell.blur();
-    $("body").append(picker);
-    picker.hide().fadeIn(100);
+    /*cell.blur();
+
     cell.addClass("picked");
     $(".picker .pick").first().focus();
-    $(".picker .selected").focus();
+    $(".picker .selected").focus();*/
+    $("body").append(picker);
+    picker.hide().fadeIn(100);
   },
 
   destroy: function() {
