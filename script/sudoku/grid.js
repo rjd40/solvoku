@@ -12,6 +12,14 @@ class Grid {
 
       this.grid.push(r);
     }
+
+    // update pencilsMarks of all cells
+
+
+  }
+
+  updateCellValue(v, x, y) {
+
   }
 
   getCell(x, y) {
