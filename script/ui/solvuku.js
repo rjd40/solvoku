@@ -9,9 +9,7 @@ $(function() {
       Picker.destroy();
     }
   });
-  $(window).click(function(e) {
-    Picker.destroy();
-  })
+  $(window).click(function() { Picker.destroy(); });
   $(window).resize(resizeGrid);
   $(".cell button").click(function(e) {
     Picker.create($(this));
@@ -33,12 +31,10 @@ function convertKeydown(e) {
   //console.log(e.keyCode);
 
   if ((k >= 49 && k <= 57) || (k >= 97 && k <= 105)) {
-    //$(this).text(e.key);
     return e.key;
   }
   //27 (esc) 8 (backspace) 46 (delete) 48/96 (0)
   if ((k == 27 || k == 8 || k == 46 || k == 48 || k == 96 )) {
-    //$(this).text(" ");
     return " ";
   }
 }
