@@ -4,31 +4,46 @@ class Grid {
 
     this.grid = [];
 
-    for (var j = 0; j < 9; ++j) {
-      var r = [];
-      for (var i = 0; i < 9; ++i) {
-        r.push(new Cell(g[j][i], i, j));
+    for (let j = 0; j < 9; ++j) {
+      let r = [];
+      for (let i = 0; i < 9; ++i) {
+        r.push(new Cell(i, j));
       }
 
       this.grid.push(r);
     }
 
     // update pencilsMarks of all cells
-
-
+    for (let j = 0; j < 9; ++j) {
+      for (let i = 0; i < 9; ++i) {
+        this.updateCellValue(g[j][i], i, j);
+      }
+    }
+    
+    return this;
   }
 
   updateCellValue(v, x, y) {
+    if (v) {
+      this.getRow(y).forEach(function(cell) {
+        cell.isNot(v);
+      });
 
+      this.getColumn(x).forEach(function(cell) {
+        cell.isNot(v);
+      });
+
+      this.getSquare(x, y).forEach(function(cell) {
+        cell.isNot(v);
+      });
+
+      this.getCell(x, y).is(v);
+    }
   }
 
-  getCell(x, y) {
-    return this.grid[y][x];
-  }
+  getCell(x, y) { return this.grid[y][x]; }
 
-  getRow(y) {
-    return this.grid[y];
-  }
+  getRow(y) { return this.grid[y]; }
 
   getColumn(x) {
     var column = [];
