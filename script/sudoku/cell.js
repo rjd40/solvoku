@@ -1,23 +1,19 @@
 class Cell {
   // val == 0 represents no value
-  constructor(v, x, y) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    
-    if (v) {
-      return this.is(v);
-    } else {
-      this.vals = [true, true, true, true, true, true, true, true, true];
-      this.val = 0;
-      return this;
-    }
+
+    this.pencil = [true, true, true, true, true, true, true, true, true];
+    this.val = 0;
+    return this;
   }
 
   is(v) {
     // if the value of the cell this pencil represents in known
     if (Cell.validate(v)) {
-      this.vals = [false, false, false, false, false, false, false, false, false];
-      this.vals[v - 1] = true;
+      this.pencil = [false, false, false, false, false, false, false, false, false];
+      this.pencil[v - 1] = true;
       this.val = v;
       return this;
     }
@@ -25,8 +21,8 @@ class Cell {
 
   isNot(v) {
     // if the value of the cell this pencil represent cannot be v
-    if (Pencil.validate(v)) {
-      this.vals[v - 1] = false;
+    if (this.val == 0 && Cell.validate(v)) {
+      this.pencil[v - 1] = false;
       return this;
     }
   }
@@ -42,7 +38,7 @@ class Cell {
     var r = [];
 
     for (var i = 0; i < 9; ++i) {
-      if (this.vals[i]) { r.push(i + 1); }
+      if (this.pencil[i]) { r.push(i + 1); }
     }
 
     return r;
