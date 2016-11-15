@@ -19,26 +19,23 @@ class Grid {
         this.updateCellValue(g[j][i], i, j);
       }
     }
-    
+
     return this;
   }
 
   updateCellValue(v, x, y) {
+    let cellToUpdate = this.getCell(x, y);
+
     if (v) {
-      this.getRow(y).forEach(function(cell) {
-        cell.isNot(v);
-      });
+      cells = [].concat(this.getRow(y), this.getColumn(x), this.getSquare(x, y));
 
-      this.getColumn(x).forEach(function(cell) {
-        cell.isNot(v);
+      cells.forEach(function(cell) {
+        if (cellToUpdate != cell) {
+          cell.isNot(v);
+        }
       });
-
-      this.getSquare(x, y).forEach(function(cell) {
-        cell.isNot(v);
-      });
-
-      this.getCell(x, y).is(v);
     }
+    cellToUpdate.is(v);
   }
 
   getCell(x, y) { return this.grid[y][x]; }
@@ -61,7 +58,7 @@ class Grid {
 
     for (var j = 0; j < 3; ++j) {
       for (var i = 0; i < 3; ++i) {
-        square.push(this.grid[j][i]);
+        square.push(this.grid[start.y + j][start.x + i]);
       }
     }
 
@@ -70,8 +67,8 @@ class Grid {
 
   getSquareIndices(x, y) {
     return {
-      x: Math.floor(x / 3),
-      y: Math.floor(y / 3)
+      x: Math.floor(x / 3) * 3,
+      y: Math.floor(y / 3) * 3
     }
   }
 
