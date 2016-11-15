@@ -21,7 +21,11 @@ class Cell {
 
   isNot(v) {
     // if the value of the cell this pencil represent cannot be v
-    if (this.val == 0 && Cell.validate(v)) {
+    if (Cell.validate(v)) {
+      if (this.val == v) {
+        console.error("Cell collision: ");
+        console.error(this);
+      }
       this.pencil[v - 1] = false;
       return this;
     }
