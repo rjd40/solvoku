@@ -16,27 +16,31 @@ class Grid {
     // update pencilsMarks of all cells
     for (let j = 0; j < 9; ++j) {
       for (let i = 0; i < 9; ++i) {
-        this.updateCellValue(g[j][i], i, j);
+        this.updateCellValue(this.getCell(i, j), g[j][i]);
       }
     }
 
     return this;
   }
 
-  updateCellValue(v, x, y) {
-    let cellToUpdate = this.getCell(x, y);
+  updateCellValue(cell, value) {
+    if (!cell.val && value) {
+      let cells = [].concat(
+        this.getRow(cell.y),
+        this.getColumn(cell.x),
+        this.getSquare(cell.x, cell.y)
+      );
 
-    if (v) {
-      let cells = [].concat(this.getRow(y), this.getColumn(x), this.getSquare(x, y));
-
-      cells.forEach(function(cell) {
-        if (cellToUpdate != cell) {
-          cell.isNot(v);
+      cells.forEach(function(c) {
+        if (c != cell) {
+          c.isNot(value);
         }
       });
 
-      cellToUpdate.is(v);
-    }    
+      cell.is(value);
+
+      return cell;
+    }
   }
 
   getCell(x, y) { return this.grid[y][x]; }
@@ -73,11 +77,23 @@ class Grid {
     }
   }
 
+  getAllCells() {
+    var cells = [];
+
+    for (var j = 0; j < 9; ++j) {
+      for (var i = 0; i < 9; ++i) {
+        cells.push(this.grid[j][i]);
+      }
+    }
+
+    return cells;
+  }
+
   toString() {
-    for (var y = 0; y < 9; ++y) {
+    for (var j = 0; j < 9; ++j) {
       var s = "| ";
-      for (var x = 0; x < 9; ++x) {
-        var v = this.grid[y][x].toString();
+      for (var i = 0; i < 9; ++i) {
+        var v = this.grid[j][i].toString();
 
         s += v + " | ";
       }
