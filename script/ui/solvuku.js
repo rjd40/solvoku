@@ -79,3 +79,9 @@ function resizeGrid() {
   $(".ui-content td").height(s);
   $(".ui-content td").width(s);
 }
+
+function displayGrid(grid) {
+  $(".cell button").each(function() {
+    $(this).text(grid.getCell($(this).data().x, $(this).data().y).toString());
+  });
+}
