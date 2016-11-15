@@ -1,6 +1,19 @@
 var Tester = {
+  runAll: function() {
+    Tester.runTest(Tester.a());
+    Tester.runTest(Tester.b());
+  },
   runTest: function(t) {
-    
+    let g = new Grid(t);
+
+    console.log("Running test");
+    console.log(g);
+    g.toString();
+
+    solve(g);
+
+    console.log(g);
+    g.toString();
   },
   a: function() {
     return [
