@@ -101,4 +101,12 @@ class Grid {
     }
     console.log("");
   }
+
+  display() {
+    displayGrid(this);
+  }
+
+  solve() {
+    solve(this);
+  }
 }
