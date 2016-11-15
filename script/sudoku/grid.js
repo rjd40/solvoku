@@ -27,15 +27,16 @@ class Grid {
     let cellToUpdate = this.getCell(x, y);
 
     if (v) {
-      cells = [].concat(this.getRow(y), this.getColumn(x), this.getSquare(x, y));
+      let cells = [].concat(this.getRow(y), this.getColumn(x), this.getSquare(x, y));
 
       cells.forEach(function(cell) {
         if (cellToUpdate != cell) {
           cell.isNot(v);
         }
       });
-    }
-    cellToUpdate.is(v);
+
+      cellToUpdate.is(v);
+    }    
   }
 
   getCell(x, y) { return this.grid[y][x]; }
