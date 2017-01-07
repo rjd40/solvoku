@@ -12,6 +12,7 @@ $(function() {
   $(window).click(function() { Picker.destroy(); });
   $(window).resize(resizeGrid);
   $(".cell button").click(function(e) {
+    $(this).css({ "font-weight": "initial" });
     Picker.create($(this));
 
     return false;
@@ -24,6 +25,7 @@ $(function() {
       $(this).text(k);
     }
   });
+  $("#btn_solve").click(solveGrid);
 });
 
 function convertKeydown(e) {
@@ -84,4 +86,25 @@ function displayGrid(grid) {
   $(".cell button").each(function() {
     $(this).text(grid.getCell($(this).data().x, $(this).data().y).toString());
   });
+}
+
+function solveGrid() {
+  let grid = [[], [], [], [], [], [], [], [], []];
+
+  $(".cell button").each(function() {
+    let v = $(this).text();
+
+    if (v == " ") {
+      v = undefined;
+    } else {
+      $(this).css({ "font-weight": "bold" });
+    }
+
+    grid[$(this).data().y].push(v);
+  });
+
+  let g = new Grid(grid);
+
+  g.solve();
+  g.display();
 }
