@@ -43,6 +43,30 @@ class Grid {
     }
   }
 
+  recalcCells() {
+    var cells = this.getAllCells();
+
+    cells.forEach(function(c) {
+      c.clearPencil();
+    });
+
+    for (var j = 0; j < 9; ++j) {
+      for (var i = 0; i < 9; ++i) {
+        var c = this.getCell(i, j);
+        var v = c.popValue();
+
+        this.updateCellValue(c, v);
+      }
+    }
+
+    return this.grid;
+  }
+
+  calcHiddenPencils() {
+
+    return this.grid()
+  }
+
   getCell(x, y) { return this.grid[y][x]; }
 
   getRow(y) { return this.grid[y]; }

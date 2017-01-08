@@ -4,9 +4,20 @@ class Cell {
     this.x = x;
     this.y = y;
 
-    this.pencil = [true, true, true, true, true, true, true, true, true];
+    this.clearPencil();
     this.val = 0;
     return this;
+  }
+
+  clearPencil() {
+    this.pencil = [true, true, true, true, true, true, true, true, true];
+  }
+
+  popValue() {
+    var v = this.val;
+    this.val = 0;
+
+    return v;
   }
 
   is(v) {
